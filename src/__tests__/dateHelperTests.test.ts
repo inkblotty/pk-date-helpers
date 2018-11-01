@@ -3,8 +3,10 @@ import { convertDateToFormatType, convertPercentDateFormat, convertShortcutDate,
 // all of these map to November 1, 2017
 const american1 = '11-01-2018';
 const american2 = '11-01-2017'; // future dates when using shortcut will be converted to previous year
+const american3 = '11-28-2017'; 
 const european1 = '01-11-2018';
 const european2 = '01-11-2017'; // future dates when using shortcut will be converted to previous year
+const european3 = '28-11-2017'; 
 const iso1 = '2018-11-01';
 const iso2 = '2017-11-01'; // future dates when using shortcut will be converted to previous year
 const julian1 = '18-305';
@@ -24,6 +26,16 @@ describe('American Format Direct Conversion:', () => {
   test('converts JULIAN date input into expected format', () => {
     const input1ToAmerican = convertDateToFormatType('JULIAN', 'AMERICAN', julian1);
     expect(input1ToAmerican).toEqual(american1);
+  });
+
+  test('converts AMERICAN date input into expected EUROPEAN format', () => {
+    const input1ToEuropean = convertDateToFormatType('EUROPEAN', 'REGULAR', american3);
+    expect(input1ToEuropean).toEqual('INVALID DATE');
+  });
+  
+  test('converts EUROPEAN date input into expected AMERICAN format', () => {
+    const input1ToEuropean = convertDateToFormatType('AMERICAN', 'REGULAR', european3);
+    expect(input1ToEuropean).toEqual('INVALID DATE');
   });
 
   test('converts THOUSAND date input into expected format', () => {
